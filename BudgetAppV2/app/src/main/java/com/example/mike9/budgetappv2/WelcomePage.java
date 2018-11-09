@@ -36,18 +36,22 @@ public class WelcomePage extends AppCompatActivity {
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         mRef = mFirebaseDatabase.getReference();
         userID = user.getUid();
-        /*mRef.addValueEventListener(new ValueEventListener() {
+
+
+
+        mRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                showData(dataSnapshot);
+                //initializing the ui component
+                TextView greeting = (TextView)findViewById(R.id.greeting);
+                User uInfo = dataSnapshot.child(userID).child("userInformation").getValue(User.class);
+                greeting.setText(uInfo.getName());
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
             }
-        });*/
-
-
+        });
     }
 
     public void onClickTransHistory(View view){
@@ -58,16 +62,5 @@ public class WelcomePage extends AppCompatActivity {
     public void onClickSetUp(View view){
         Intent nextPage = new Intent(getApplicationContext(), UserInformation.class);
         startActivity(nextPage);
-    }
-
-    //helper method
-    private void showData(DataSnapshot dataSnapshot){
-        for(DataSnapshot ds : dataSnapshot.getChildren()){
-            User uInfo = new User();
-            uInfo.setName(ds.child(userID).getValue(User.class).getName());
-
-            TextView greeting = (TextView)findViewById(R.id.greeting);
-            greeting.setText(uInfo.getName());
-        }
     }
 }

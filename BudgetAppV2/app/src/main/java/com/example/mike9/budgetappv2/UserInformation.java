@@ -1,5 +1,6 @@
 package com.example.mike9.budgetappv2;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -36,8 +37,13 @@ public class UserInformation extends AppCompatActivity {
         else{
             Toast.makeText(UserInformation.this, "Attempting", Toast.LENGTH_SHORT).show();
             String userID = user.getUid();
-            mRef.child(userID).child("name").setValue(username);
+            mRef.child(userID).child("userInformation").child("name").setValue(username);
             mUsername.setText("");
         }
+    }
+
+    public void onClickMainpage(View view){
+        Intent intent = new Intent(getApplicationContext(), WelcomePage.class);
+        startActivity(intent);
     }
 }

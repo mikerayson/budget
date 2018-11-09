@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()){
                                 FirebaseUser user = mAuth.getCurrentUser();
-                                Intent welcome = new Intent(getApplicationContext(), WelcomePage.class);
+                                Intent welcome = new Intent(getApplicationContext(), UserInformation.class);
                                 startActivity(welcome);
                             } else {
                                 Toast.makeText(MainActivity.this, "Error creating user, please try again",
